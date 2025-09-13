@@ -25,14 +25,29 @@ Built with **Spring Boot 3**, **Spring Security (JWT)**, and **H2 in-memory data
 ```bash
 git clone https://github.com/the1zozz/task-management.git
 cd task-management
+--- 
 
+This project loads database configuration from environment variables.
+If not set, defaults will be used.
+
+Variable	    Description 	          Default Value
+PROFILE          active profile               dev
+DB_URL	      JDBC connection URL	    jdbc:h2:mem:testdb
+DB_DRIVER	     JDBC driver         	      org.h2.Driver
+DB_USERNAME	   Database username	              moaaz
+DB_PASSWORD 	Database password	             (empty)
+--- 
+## 🔑 Authentication Flow
+1-Sign Up → Register a new user
+2-Sign In → Authenticate user & receive JWT token
+3-Use JWT → Send token in Authorization: Bearer <token> header
+---
 ## ⚙️ PostMan Coolection
-collection is in src/main/resources/Task-Managment.postman_collection.json
+collection is in postman folder
 
-🔎 Swagger API Docs
+## 🔎 Swagger API Docs
 Once the app is running, open:
 👉 http://localhost:8080/swagger-ui.html
-
-👨‍💻 Author
-
+---
+👨## ‍💻 Author
 Moaaz Atef Ahmed – moazatef435@gmail.com
