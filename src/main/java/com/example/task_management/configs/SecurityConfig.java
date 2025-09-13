@@ -16,6 +16,8 @@ public class SecurityConfig {
     private JwtEntryPoint jwtEntryPoint;
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
+    @Autowired
+    private SecurityProperties securityProperties;
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -24,11 +26,8 @@ public class SecurityConfig {
                 .headers(headers -> headers.frameOptions(frame-> frame.sameOrigin()))
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(jwtEntryPoint))
                 .authorizeHttpRequests((authorize) ->
-                authorize.requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/swagger-ui/**").permitAll()
-                .requestMatchers("/swagger-ui.html").permitAll()
-                .requestMatchers("/v3/api-docs/**").permitAll()
-                .requestMatchers("/h2-console/**").permitAll()
+                        //white list for public access
+                authorize.requestMatchers(securityProperties.getWhiteList().toArray(new String[0])).permitAll()
                 .anyRequest().authenticated())
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
